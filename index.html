@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
-
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link href="style.css" type="text/css" rel="stylesheet">
+</head>
 <body>
-
+<div class="center">
   <h1>Translate!</h1>
   <h2>English to Maori</h2>
 
 
     <label>English:</label>
-      <input id="english" type="text" name="english" />
-
-<button id="button">Translate</button>
-
-<div id="result"></div>
+      <input id="english" type="text" name="english" /><br><br>
+      <button id="button">Translate</button><br><br>
+    <label id="maori">Maori:</label>
+    <span id="result"></span>
+</div>
 
 
 
 <script>
 
-
 document.getElementById("button").addEventListener("click", translate);
 
 function translate() {
   var english = document.getElementById("english").value;
+  var english = english.toLowerCase();
   console.log(english);
   var request = "https://eda-te-reo.herokuapp.com/api/translate?word="
 + english;
-var xhr = new XMLHttpRequest();
-xhr.open('GET', request, true);
-xhr.send();
-xhr.addEventListener("readystatechange", processRequest, false);
-  function processRequest(e) {
-    if(xhr.readyState == 4 && xhr.status ==200){
-    console.log(xhr.responseText);
-    document.getElementById("result").innerHTML = xhr.responseText;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', request, true);
+  xhr.send();
+  xhr.addEventListener("readystatechange", processRequest, false);
+    function processRequest(e) {
+      if(xhr.readyState == 4 && xhr.status ==200){
+      console.log(xhr.responseText);
+      document.getElementById("result").innerHTML = xhr.responseText;
   }
 }
 
